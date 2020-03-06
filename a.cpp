@@ -17,7 +17,7 @@ int main(){
     for(int &x : h)cin>>x;
 
     //dp[i] - min possible cost incurred to
-    //         get to stone i, ans = dp[n]
+    //         get to stone i, ans = dp[n-1]
     //dp[i] = min(dp[i-1] + abs(h[i]-h[i-1]), dp[i-2] + abs(h[i]-h[i-2]))
 
     int dp[n+5];
