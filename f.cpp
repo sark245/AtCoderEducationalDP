@@ -7,7 +7,10 @@ using ll = long long;
 using ld = long double;
 
 
-// dp[i][j] = longest common subsequence in 1...i and 1...j
+// dp[i][j] = longest common subsequence in s[1...i] and t[1...j]
+// We also have to print the LCS which can be done by
+// moving diagonally if we encounter a match
+// else move backwards on the string which offers better value of dp[i][j]
 
 
 int dp[3005][3005];
