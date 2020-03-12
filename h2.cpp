@@ -23,7 +23,11 @@ void add_self(int & a, int b){
          a-=mod;
 }
 
-
+//dp[i][j] = Number of ways to reach (i,j) from (1,1) using 
+        // only D and R moves!!
+//So the state of the recursion in this problem is the location of the man
+// which is depicted using (x,y)
+//Also, dp[i][j] = dp[i][j-1] + dp[i-1][j]
 
 int main(){
     IOS
