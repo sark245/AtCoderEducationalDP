@@ -15,42 +15,40 @@ const int mod = 1e9 + 7;
  
 ll pwr(ll a, ll b);
     
- 
+const int N = 5010;
+ll dp[N][N];
  
  
 int main(){
    IOS
  
-   int n; cin>>n;
-   vi a(n);
-   
-   int sum = 0;
-   for(int &x : a)cin>>x, sum += x;
+    int n; cin>>n;
+    
+    vi a(n);
+    for(int &x : a)cin>>x;
  
-    vector<bool> dp(sum + 1);
+    memset(dp, 0, sizeof dp);
  
-   
- 
-   dp[0] = dp[a[0]] = true;
- 
-    for(int i = 1; i < n; i++){
-        vector<bool> new_dp = dp;
-        for(int s = 0; s <= sum; s++){
-            if(s >= a[i])
-                new_dp[s] = new_dp[s] | dp[s - a[i]];
+    for(int i = 0; i < n; i++){
+        dp[i][i] = a[i];
+        if(i != n-1){
+            dp[i][i + 1] = max(a[i], a[i + 1]);
         }
-        dp = new_dp;
+    }
+    
+ 
+    for(int l = 3; l <= n; l++){
+        for(int i = 0; i < n - l + 1; i++){
+            int j = i + l - 1;
+            ll x = a[i] + min(dp[i + 1][j-1], dp[i + 2][j]);
+            ll y = a[j] + min(dp[i + 1][j-1], dp[i][j - 2]);
+            dp[i][j] = max(x, y);   
+        }
     }
  
+    cout<<dp[0][n-1]<<"\n";
  
  
-    vi res;
-    for(int j = 1; j <= sum; j++){
-        if(dp[j])res.pb(j);
-    }
- 
-    cout<<res.size()<<"\n";
-    for(auto i : res)cout<<i<<" ";
 }
  
 ll pwr(ll a, ll b){
